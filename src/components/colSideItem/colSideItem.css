@@ -1,0 +1,9 @@
+.col_side_item {
+    color: whitesmoke;
+    border-radius: 10px;
+    background-color: darkslategrey;
+    margin-bottom: 5%;
+    margin-right: 7%;
+    padding-left: 5%;
+    display: flex;
+}

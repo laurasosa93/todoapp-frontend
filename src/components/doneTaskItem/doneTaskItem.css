@@ -1,0 +1,26 @@
+.done_task_item {
+    color: rgb(151, 148, 148);
+    text-decoration: line-through;
+    position: relative;
+    background-color: rgb(68, 66, 66);
+    margin-bottom: 2%;
+    padding-left: 2%;
+    margin-right: 2%;
+    border-radius: 10px;
+    box-shadow: 2px 3px 3px black;
+    display:flex;
+    align-items: center;
+    
+}
+
+.done_task_item:hover {
+    background-color: rgb(114, 113, 113);
+}
+
+.edit_button {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2%;
+
+}

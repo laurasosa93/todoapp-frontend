@@ -1,0 +1,56 @@
+.navBar {
+  background-color: rgb(26, 26, 26);
+  position: relative;
+  display: inline-flex;
+  max-width: 80%;
+  background-color: rgb(41, 41, 41);
+}
+
+.navBar:hover, .navBar:active {
+  background-color: rgb(80, 80, 80);
+}
+
+
+.task_link {
+  background-color: rgb(26, 26, 26);
+  color: white;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-top: 2%;
+  text-decoration: none;
+}
+
+.collection_link {
+  background-color: rgb(26, 26, 26);
+  color: white;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-top: 2%;
+  text-decoration: none;
+}
+
+.search {
+  padding-top: 2%;
+}
+
+.user_link {
+  background-color: rgb(26, 26, 26);
+  color: white;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-top: 2%;
+  text-decoration: none;
+}
+
+.task_link:active, .task_link:hover {
+  background-color: rgb(80, 80, 80);
+}
+
+.collection_link:active, .collection_link:hover {
+  background-color: rgb(80, 80, 80);
+}
+
+.user_link:active, .user_link:hover {
+  background-color: rgb(80, 80, 80);
+  
+}

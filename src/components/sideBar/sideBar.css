@@ -1,0 +1,35 @@
+.side_bar {
+ position: relative;
+ padding-left: 10%;
+ display: grid;
+ grid-template-rows: 70px 300px auto;
+ grid-template-areas: 
+ "bar_headline"
+ "collections_menu"
+ "add_collection"
+
+}
+
+.bar_headline {
+    font-size: large;
+    color: darkgray;
+}
+
+.add_collection {
+    color: whitesmoke;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; 
+}
+
+.add_col_button {
+    background-color: rgb(230, 39, 39);
+    font-size: x-large;
+    max-height: 33px;
+    box-shadow:  1px 1px 1px rgb(61, 61, 61);
+    border-radius: 7px;
+}
+.add_col_button:hover {
+    background-color: tomato;
+}
