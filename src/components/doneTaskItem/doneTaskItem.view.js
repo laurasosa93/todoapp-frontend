@@ -20,7 +20,7 @@ const DoneTaskItem = ({task}) => {
       mode: 'cors',
       body: JSON.stringify(body),
     };
-    fetch(url, body, options)
+    fetch(url, options)
     .then(response => {
       console.log(response);
       if (response.ok) {
@@ -75,9 +75,8 @@ const DoneTaskItem = ({task}) => {
 return(
 
  <div className="done_task_item" >
-    <input type="checkbox" onClick={changeStatus}/> 
+    <input type="checkbox" className="checkbox" onClick={changeStatus}/> 
     <p>{task.name}</p>
-    <input type="button" value="Edit" className="edit_button" />
     <input type="button" value="Delete" className="edit_button" onClick={deleteTask}/>
   </div>
 

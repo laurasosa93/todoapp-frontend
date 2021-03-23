@@ -17,6 +17,26 @@ const CollectionPage = ({collectionData}) => {
         console.log(setCollection);
       }
     }, []);
+
+    useEffect(()=> {
+      fetch(`http://localhost:3001/collection`)
+      .then(response => {
+        console.log(response);
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject();
+      })
+      .then(data => {
+        console.log(data);
+        if(data){
+          setCollection(data);
+        }
+     })
+      .catch(error => {
+        console.error(error);
+      });
+    }, [openModal]);
     
          
 

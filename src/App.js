@@ -15,7 +15,6 @@ import { TASK_PAGE, USER_PAGE, COLLECTION_PAGE } from './routers/routers';
 function App() {
  
   const [collectionList, setCollectionList] = useState([]);
-  const [taskList, setTaskList] = useState([]);
   const [colToTask, setColToTask] = useState({});
 
     useEffect(()=> {
@@ -40,27 +39,8 @@ function App() {
 
        console.log(collectionList);
 
-    useEffect(() => {
-      fetch(`http://localhost:3001/task`)
-      .then(response => {
-        console.log(response);
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject();
-      })
-      .then(data => {
-        console.log(data);
-        setTaskList(data);   
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    }, []);
+  
 
-     
-
-      
   return (
     <Router >
   <div className="App">
@@ -73,7 +53,7 @@ function App() {
         <Route path={TASK_PAGE}>
           <div className="task_route">
            <SideBar className="sidebar" collectionData={collectionList} sendCol={setColToTask}/> 
-           <TaskPage className="taskpage" getCol={colToTask} getTasks={taskList}/>
+           <TaskPage className="taskpage" getCol={colToTask} />
            </div>
         </Route>
         <Route path={COLLECTION_PAGE}>

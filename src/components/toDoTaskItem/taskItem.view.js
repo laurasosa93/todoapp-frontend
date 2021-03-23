@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import './taskItem.css';
 
 const ToDoTaskItem = ({task}) => {
@@ -22,7 +22,7 @@ const ToDoTaskItem = ({task}) => {
       mode: 'cors',
       body: JSON.stringify(body),
     };
-    fetch(url, body, options)
+    fetch(url, options)
     .then(response => {
       console.log(response);
       if (response.ok) {
@@ -40,14 +40,9 @@ const ToDoTaskItem = ({task}) => {
   }
  
   const changeStatus = () => {
-    if(toDo === true) {
-      setToDo(false);
-    }else{
-      setToDo(true)
-     };
+    setToDo(!toDo);
     handleStatus();
   }
-  
 
 
   const deleteTask = () => {
@@ -82,7 +77,7 @@ const ToDoTaskItem = ({task}) => {
 return(
   
  <div className="task_item" >
-    <input type="checkbox" onClick={changeStatus}/> 
+    <input type="checkbox" className="checkbox" onClick={changeStatus}/> 
     <p>{task.name}</p>
     <input type="button" value="X" className="delete_button" onClick={deleteTask}/>
     

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './newCollectionModal.css';
-
-  //  buscar color-picker, aquí hay que meter un select para los iconos
-
+import Select from 'react-select';
+import {iconsMap} from '../../assets/icons';
   
 
 const NewCollectionModal = ({open, close}) => {
@@ -12,12 +11,15 @@ const NewCollectionModal = ({open, close}) => {
     } 
 
     const [collectionDescription, setCollectionDescription] = useState('');
-  
+    const [icon, setIcon] = useState(undefined);
+    const [color, setColor] = useState(undefined);
+ 
     const createCollection = () => {
       const url = 'http://localhost:3001/collection';
       const body = {
         name: `${collectionDescription}`,
-     
+        icon: icon,
+        color: `${color}`    
       };
   
       const options = {
@@ -49,6 +51,9 @@ const NewCollectionModal = ({open, close}) => {
       });
     }
 
+const options = Object.keys(iconsMap).map(iconKey => {
+  return{label: iconsMap[iconKey], value: iconKey}
+})
 
   return(
 
@@ -61,6 +66,15 @@ const NewCollectionModal = ({open, close}) => {
      <input type="text" className="input" placeholder="Write new collection" onChange={e => setCollectionDescription(e.target.value)}/>
      </label>
    </form>
+   <form>
+    <input type="color" id="color" name="color"
+           value={color} onChange={e=>setColor(e.target.value)}/>
+    <label>Color</label>
+    </form>
+
+  <Select className="select_icon" options={options} onChange={setIcon}/>
+
+
    <input type="button" className="cancelbutton" value="Cancel" onClick={close}/>
    <input type="submit" className="createbutton" value="Create" onClick={createCollection}/>
   </div>

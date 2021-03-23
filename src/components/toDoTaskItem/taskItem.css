@@ -7,8 +7,12 @@
     margin-right: 2%;
     border-radius: 10px;
     box-shadow: 2px 3px 3px black;
-    display:flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-areas: 
+    "checkbox"
+    "task_item" 
+    "delete_button";
     
 }
 
@@ -16,10 +20,8 @@
     background-color: rgb(114, 113, 113);
 }
 
-.edit_button {
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 2%;
-
+.checkbox {
+    margin-top: 25%;
+    width: 20px;
+    height: 20px;
 }
