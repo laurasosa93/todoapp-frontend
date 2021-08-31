@@ -1,3 +1,5 @@
+
+
 import {
     FaBrain,
     FaBomb,
@@ -10,12 +12,14 @@ import {
 } from 'react-icons/fa';
 
 export const iconsMap = {
-    'brain': <FaBrain/>,
-    'bomb': <FaBomb/>,
-    'broom': <FaBroom/>,
-    'cat': <FaCat/>,
-    'trash': <FaRegTrashAlt/>,
-    'shopping': <FaShoppingCart/>,
-    'poo': <FaPoo/>,
-    'laptop': <FaLaptopCode/>,
+    'brain': <FaBrain />,
+    'bomb': <FaBomb />,
+    'broom': <FaBroom />,
+    'cat': <FaCat />,
+    'trash': <FaRegTrashAlt />,
+    'shopping': <FaShoppingCart />,
+    'poo': <FaPoo />,
+    'laptop': <FaLaptopCode />,
 };
+
+export default iconsMap;

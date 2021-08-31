@@ -1,5 +1,3 @@
-
-import TaskPage from '.TtaskPage.view';
-
+import TaskPage from './taskPage.view';
 
 export default TaskPage;

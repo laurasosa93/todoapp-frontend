@@ -1,84 +1,82 @@
 import React, { useState } from 'react';
-import './newCollectionModal.css';
 import Select from 'react-select';
-import {iconsMap} from '../../assets/icons';
-  
+import styles from './newCollectionModal.module.css';
+import { API_URL } from '../../constants/routers';
+import { iconsMap } from '../../assets/icons';
 
-const NewCollectionModal = ({open, close}) => {
 
-    if (!open) {
-        return null;
-    } 
+const NewCollectionModal = ({ open, close }) => {
 
-    const [collectionDescription, setCollectionDescription] = useState('');
-    const [icon, setIcon] = useState(undefined);
-    const [color, setColor] = useState(undefined);
- 
-    const createCollection = () => {
-      const url = 'http://localhost:3001/collection';
-      const body = {
-        name: `${collectionDescription}`,
-        icon: icon,
-        color: `${color}`    
-      };
-  
-      const options = {
-        method: 'POST',
-        headers: new Headers({
-          Accept: 'application/json',
-          'Content-type': 'application/json',
-        }),
-        mode: 'cors',
-        body: JSON.stringify(body),
-      };
-  
-      fetch(url, options)
+  if (!open) {
+    return null;
+  }
+
+  const [collectionDescription, setCollectionDescription] = useState('');
+  const [icon, setIcon] = useState({});
+  const [color, setColor] = useState(undefined);
+
+
+  const createCollection = () => {
+    const url = `${API_URL}/collection`;
+    const body = {
+      name: `${collectionDescription}`,
+      icon: `${icon}`,
+      color: `${color}`
+    };
+
+
+    const options = {
+      method: 'POST',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+      }),
+      mode: 'cors',
+      body: JSON.stringify(body),
+    };
+
+    fetch(url, options)
       .then(response => {
-        console.log('Primer then');
-        console.log(response);
         if (response.status === 200) {
           return response.json();
         }
         return Promise.reject();
       })
       .then(response => {
-        console.log('Segundo then');
-        console.log(response);
         setCollectionDescription(response);
       })
-      .catch(error => {
-        console.error(error);
-      });
-    }
+      .then(close())
+      .catch();
+  }
 
-const options = Object.keys(iconsMap).map(iconKey => {
-  return{label: iconsMap[iconKey], value: iconKey}
-})
+  const options = Object.keys(iconsMap).map(iconKey =>
+  (
+    { label: iconsMap[iconKey], value: iconKey })
+  )
 
-  return(
+  return (
+    <div className={styles.modal}>
+      <div className={styles.newCollectionModal}>
+        <h2 className={styles.headline}>+ Add new collection</h2>
+        <form>
+          <label>
+            Collection description
+            <br />
+            <input type='text' className='input' placeholder='Write new collection' onChange={e => setCollectionDescription(e.target.value)} />
+          </label>
+        </form>
+        <form>
+          <input type='color' id='color' name='color'
+            value={color} onChange={e => setColor(e.target.value)} />
+          <label>Color</label>
+        </form>
 
-<div className='newCollectionModal'>
-  <h2 className="headline">+ Add new collection</h2>
-   <form>
-    <label>
-      Collection description
-      <br/>
-     <input type="text" className="input" placeholder="Write new collection" onChange={e => setCollectionDescription(e.target.value)}/>
-     </label>
-   </form>
-   <form>
-    <input type="color" id="color" name="color"
-           value={color} onChange={e=>setColor(e.target.value)}/>
-    <label>Color</label>
-    </form>
+        <Select className={styles.select_icon} options={options} onChange={setIcon} />
 
-  <Select className="select_icon" options={options} onChange={setIcon}/>
-
-
-   <input type="button" className="cancelbutton" value="Cancel" onClick={close}/>
-   <input type="submit" className="createbutton" value="Create" onClick={createCollection}/>
-  </div>
-
+        <div type='button' className={styles.cancelbutton} onClick={close}>Cancel</div>
+        <input type='submit' className={styles.createbutton} value='Create' onClick={createCollection} />
+      </div>
+    </div>
   )
 }
 

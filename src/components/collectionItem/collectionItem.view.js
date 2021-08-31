@@ -1,58 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import './collectionItem.css';
+import styles from './collectionItem.module.css';
+import { API_URL } from '../../constants/routers';
 
-
-
-
-const CollectionItem = ({colItem}) => {
+const CollectionItem = ({ colItem, refresh }) => {
 
   const [itemColor, setItemColor] = useState();
 
-  useEffect(()=> {
-  setItemColor(colItem.color);
-}, [])
+  useEffect(() => {
+    setItemColor(colItem.color);
+  }, [])
 
 
-const deleteCol = () => {
-  const url = `http://localhost:3001/collection/${colItem._id}`;
-       
-  const options = {
-    method: 'DELETE',
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-type': 'application/json',
-    }),
-    mode: 'cors',
-  };
-  fetch(url, options)
-  .then(response => {
-    console.log(response);
-    if (response.ok) {
-      return response.json();
-    }
-    return Promise.reject();
-  })
-  .then(response => {
-    console.log(response);     
-    
-  })
-  .catch(error => {
-    console.error(error);
-  });
-}
+  const deleteCol = () => {
+    const url = `${API_URL}/collection/${colItem._id}`;
 
+    const options = {
+      method: 'DELETE',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+      }),
+      mode: 'cors',
+    };
+    fetch(url, options)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject();
+      })
+      .then(refresh())
+      .catch();
+  }
 
+  return (
+    < div className={styles.collection_item} style={{ backgroundColor: itemColor }} >
 
-
-return(
-
-
-< div className="collection_item" style={{backgroundColor: itemColor}} >
- 
-  <p >{colItem.name}</p>
-  <input type="button" value="X" onClick={deleteCol}/>
-   
-</div>
-  )};
+      <p className={styles.text}>{colItem.name}</p>
+      <div className={styles.delete} onClick={deleteCol}>x</div>
+    </div>
+  )
+};
 
 export default CollectionItem;

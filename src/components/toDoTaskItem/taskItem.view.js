@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import './taskItem.css';
 
-const ToDoTaskItem = ({task}) => {
+const ToDoTaskItem = ({ task }) => {
 
   const [toDo, setToDo] = useState(true);
 
-  
- 
   const handleStatus = () => {
     const url = `http://localhost:3001/task/${task._id}`;
     const body = {
       status: toDo
     }
-      
+
     const options = {
       method: 'PUT',
       headers: new Headers({
@@ -23,22 +21,15 @@ const ToDoTaskItem = ({task}) => {
       body: JSON.stringify(body),
     };
     fetch(url, options)
-    .then(response => {
-      console.log(response);
-      if (response.ok) {
-        return response.json();
-      }
-      return Promise.reject();
-    })
-    .then(response => {
-      console.log(response);     
-      
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject();
+      })
+      .catch();
   }
- 
+
   const changeStatus = () => {
     setToDo(!toDo);
     handleStatus();
@@ -47,7 +38,7 @@ const ToDoTaskItem = ({task}) => {
 
   const deleteTask = () => {
     const url = `http://localhost:3001/task/${task._id}`;
-         
+
     const options = {
       method: 'DELETE',
       headers: new Headers({
@@ -57,31 +48,24 @@ const ToDoTaskItem = ({task}) => {
       mode: 'cors',
     };
     fetch(url, options)
-    .then(response => {
-      console.log(response);
-      if (response.ok) {
-        return response.json();
-      }
-      return Promise.reject();
-    })
-    .then(response => {
-      console.log(response);     
-      
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject();
+      })
+      .catch();
   }
 
 
-return(
-  
- <div className="task_item" >
-    <input type="checkbox" className="checkbox" onClick={changeStatus}/> 
-    <p>{task.name}</p>
-    <input type="button" value="X" className="delete_button" onClick={deleteTask}/>
-    
-</div>
+  return (
+
+    <div className="task_item" >
+      <input type="checkbox" className="checkbox" onClick={changeStatus} />
+      <p>{task.name}</p>
+      <input type="button" value="X" className="delete_button" onClick={deleteTask} />
+
+    </div>
 
   )
 }

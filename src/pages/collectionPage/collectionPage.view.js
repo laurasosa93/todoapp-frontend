@@ -1,59 +1,38 @@
-import React, {useState, useEffect} from 'react';
-import './collectionPage.css';
+import React, { useEffect, useState, useContext } from 'react';
+import styles from './collectionPage.module.css';
 import NewCollectionModal from '../../components/newCollectionModal/newCollectionModal';
 import CollectionItem from '../../components/collectionItem/collectionItem.view';
+import CollectionContext from '../../context/collectionContext';
+import CollectionModal from '../../components/collectionModal';
 
-const CollectionPage = ({collectionData}) => {
-
-  const [openModal, setOpenModal] = useState(false);
-  const [collection, setCollection] = useState([]);
-
-  console.log(collectionData);
-
+const CollectionPage = ({ refresh }) => {
+    const { colData } = useContext(CollectionContext);
+    const [openModal, setOpenModal] = useState(false);
+    const [openCol, setOpenCol] = useState(false);
 
     useEffect(() => {
-      if(collectionData) {
-        setCollection(collectionData);
-        console.log(setCollection);
-      }
-    }, []);
-
-    useEffect(()=> {
-      fetch(`http://localhost:3001/collection`)
-      .then(response => {
-        console.log(response);
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject();
-      })
-      .then(data => {
-        console.log(data);
-        if(data){
-          setCollection(data);
-        }
-     })
-      .catch(error => {
-        console.error(error);
-      });
+        refresh();
     }, [openModal]);
-    
-         
+
+    const editCol = () => {
+        setOpenCol(true);
+    }
 
     return (
 
-        <div className='collectionPage'>
-            <div className="collectionList">
-            <>
-           { collection.length ? collection.map(colItem =>
-               < CollectionItem 
-                   key={colItem._id} colItem={colItem}/>) 
-                   : <p>Start adding collections</p>}
-              </>
-              </div>
-              <NewCollectionModal open={openModal} close={()=> setOpenModal(false)}/>
-            <input type="button" className="addButton" value="Add new collection" onClick={()=> setOpenModal(!openModal)}/>
-            
+        <div className={styles.collectionPage}>
+            <div className={styles.collectionList}>
+                <>
+
+                    {colData ? colData.map(colItem =>
+                        < CollectionItem
+                            key={colItem._id} colItem={colItem} refresh={refresh} onClick={editCol} />)
+                        : <p>Start adding collections</p>}
+                </>
+            </div>
+            <NewCollectionModal open={openModal} close={() => setOpenModal(false)} />
+            <input type="button" className={styles.addButton} value="Add new collection" onClick={() => setOpenModal(!openModal)} />
+            {openCol ? (<CollectionModal />) : null}
         </div>
     )
 }

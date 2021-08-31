@@ -1,9 +1,19 @@
-
+.modal{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: rgba(38, 35, 41, 0.692);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-x: hidden;
+}
 .newCollectionModal {
-    position: absolute; 
-    z-index: 1;
-    margin-top: 15%;
-    margin-left: 15%;
+    margin: auto;
+    margin-top: 25vh;
+    width: 50%;
+    height: 40vh;
     padding-left: 7%;
     padding-right: 7%;
     padding-bottom: 3%;
@@ -22,8 +32,7 @@
  border-radius: 10px;
  font-size: medium;
  padding: 2%;
- margin-top: 10%;
- 
+ margin-top: 2%; 
 }
 .cancelbutton:hover{
  background-color: tomato;
@@ -36,17 +45,14 @@
  border-radius: 10px;
  font-size: medium;
  padding: 2%;
- margin-top: 10%;
+ margin-top: 2%;
 }
 .createbutton:hover {
     background-color: greenyellow;
 }
 
 .input {
-    padding: 5%;
+    padding: 3%;
     border-radius: 10px;
 }
 
-.headline {
-
-}

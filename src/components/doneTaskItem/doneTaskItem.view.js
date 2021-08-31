@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import './doneTaskItem.css';
+import styles from './doneTaskItem.module.css';
+import { API_URL } from '../../constants/routers';
 
-const DoneTaskItem = ({task}) => {
+const DoneTaskItem = ({ task }) => {
 
   const [toDo, setToDo] = useState(true);
- 
+
   const handleStatus = () => {
-    const url = `http://localhost:3001/task/${task._id}`;
+    const url = `${API_URL}/task/${task._id}`;
     const body = {
       status: toDo
     }
-      
+
     const options = {
-      method: 'PUT', 
+      method: 'PUT',
       headers: new Headers({
         Accept: 'application/json',
         'Content-type': 'application/json',
@@ -21,25 +22,19 @@ const DoneTaskItem = ({task}) => {
       body: JSON.stringify(body),
     };
     fetch(url, options)
-    .then(response => {
-      console.log(response);
-      if (response.ok) {
-        return response.json();
-      }
-      return Promise.reject();
-    })
-    .then(response => {
-      console.log(response);     
-      
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject();
+      })
+      .catch();
   }
 
   const deleteTask = () => {
-    const url = `http://localhost:3001/task/${task._id}`;
-         
+    const url = `${API_URL}/task/${task._id}`;
+
+
     const options = {
       method: 'DELETE',
       headers: new Headers({
@@ -49,36 +44,30 @@ const DoneTaskItem = ({task}) => {
       mode: 'cors',
     };
     fetch(url, options)
-    .then(response => {
-      console.log(response);
-      if (response.ok) {
-        return response.json();
-      }
-      return Promise.reject();
-    })
-    .then(response => {
-      console.log(response);     
-      
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject();
+      })
+      .catch();
   }
 
   const changeStatus = () => {
-  setToDo(!toDo);
-  
+    setToDo(!toDo);
+
     handleStatus();
-   }
+  }
 
 
-return(
+  return (
 
- <div className="done_task_item" >
-    <input type="checkbox" className="checkbox" onClick={changeStatus}/> 
-    <p>{task.name}</p>
-    <input type="button" value="Delete" className="edit_button" onClick={deleteTask}/>
-  </div>
+    <div className={styles.done_task_item} >
+
+      <input type='button' className={styles.checkbox} onClick={changeStatus} />
+      <p>{task.name}</p>
+      <input type='button' value='Delete' className={styles.edit_button} onClick={deleteTask} />
+    </div>
 
   )
 }

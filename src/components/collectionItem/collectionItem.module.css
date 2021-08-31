@@ -1,0 +1,27 @@
+.collection_item{
+    color: whitesmoke;
+    background-color: grey;
+    margin: 4%;
+    padding: 4%;
+    width: 7%;
+    height: 6%;
+    border-radius: 10px;
+    border-color: whitesmoke;
+    position: relative;
+    display: inline-flex;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.delete {
+position: inherit;
+bottom: 95%;
+left: 15%;
+background-color: none;
+color:whitesmoke;
+font-weight: 600;
+}
+
+.delete:hover {
+    cursor: pointer;
+    transform: scale(1.1);}

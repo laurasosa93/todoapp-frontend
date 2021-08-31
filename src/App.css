@@ -1,25 +1,4 @@
 .App {
-  position: absolute;
-  margin-top: 3%;
-  margin-left: 3%;
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-rows: 10% auto;
-  grid-template-areas: 
-    "navbar"
-    "main"
 }
-
-.main {
-  max-width: 80%;
-  height: fit-content;
-  background-color: rgb(80, 80, 80);
-  }
-
-  .task_route {
-    display:grid;
-    grid-template-columns: 20% auto;
-    grid-template-areas: 
-     "sidebar" "taskpage"
-  }
